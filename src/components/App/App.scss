@@ -1,0 +1,19 @@
+.heading {
+  font-size: 28px;
+  margin: 16px 0;
+}
+
+.main {
+  font-family: Roboto, sans-serif;
+  width: 320px;
+  margin: auto;
+
+  .inputField {
+    width: 320px;
+    border-radius: 8px;
+    padding-left: 8px;
+    border: 1px solid black;
+    height: 32px;
+    box-sizing: border-box;
+  }
+}

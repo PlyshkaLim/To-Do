@@ -1,61 +1,72 @@
-import './App.css';
-import * as React from 'react';
-import ToDoLine from '../ToDoLine/ToDoLine';
-import { Context } from '../../ListContext';
-import { useState } from 'react';
+import './App.scss';
+import '../../../node_modules/reset-css/reset.css';
 
-export type ListType = {
+import * as React from 'react';
+import { useState } from 'react';
+import { ChangeEvent } from 'react';
+
+import { Context } from '../../ListContext';
+import ToDoLine from '../ToDoLine/ToDoLine';
+
+export type ListItemType = {
   text: string;
   checked: boolean;
 };
 
 const App = () => {
-  const array: ListType[] = [
+  const array: ListItemType[] = [
     { text: 'Поймать кошку', checked: true },
     { text: 'Помыть кошку', checked: false },
     { text: 'Погладить кошку', checked: false },
   ];
-  const [list, setList] = useState<ListType[]>(array);
+  const [list, setList] = useState<ListItemType[]>(array);
   const [inputState, setInputState] = useState<string>('');
 
-  function addListItem() {
+  const addListItem = () => {
     if (inputState !== '') {
-      list.push({ text: inputState, checked: false }); //!!
+      setList([
+        ...list,
+        {
+          text: inputState,
+          checked: false,
+        },
+      ]);
       setInputState('');
     }
-  }
+  };
 
-  function changeInput(event: any) {
+  const changeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInputState(event.target.value);
-  }
+  };
 
-  function enterKey(event: any) {
+  const enterKey = (event: any) => {
     if (event.key === 'Enter') {
       addListItem();
     }
-  }
+  };
 
   return (
     <Context.Provider
       value={{
         List: list,
-        changeList: (value: ListType[]) => setList(value),
+        changeList: (value: ListItemType[]) => setList(value),
       }}
     >
       <div className={'main'}>
-        <h1>To Do List</h1>
+        <h1 className={'heading'}>To Do List</h1>
         <input
+          className={'inputField'}
           type={'text'}
           placeholder={'What need to do...'}
           value={inputState}
           onChange={changeInput}
-          onKeyPress={enterKey}
+          onKeyDown={enterKey}
         />
-        <button onClick={addListItem}>Add</button>
+        {/*<button onClick={addListItem}>Add</button>*/}
         <Context.Consumer>
           {(Context) =>
-            Context.List.map((item: number, id: number) => (
-              <ToDoLine item={item} key={id} qq={addListItem} />
+            Context.List.map((item: ListItemType, id: number) => (
+              <ToDoLine item={item} key={id} setList={setList} />
             ))
           }
         </Context.Consumer>

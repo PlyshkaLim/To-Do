@@ -10,7 +10,8 @@
   "parser": "@babel/eslint-parser",
   "plugins": [
     "react",
-    "prettier"
+    "prettier",
+    "simple-import-sort"
   ],
   "rules": {
     //  Подсвечивает ошибки из Prettier.
@@ -20,6 +21,11 @@
     // Запретить использование необъявленных переменных
     "no-undef": 0,
     // запрет неиспользуемых переменных
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    // sort import
+    "simple-import-sort/sort": "error",
+    // Make sure to remove or disable other sorting rules, such as sort-imports and import/order.
+    "sort-imports": 0,
+    "import/order": 0
   }
 }
