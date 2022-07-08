@@ -1,5 +1,22 @@
+h1 {
+    margin-bottom: 15px;
+}
+
 .main {
+    font-family: Roboto, sans-serif;
     width: 300px;
-    border: 1px solid black;
     margin: auto;
+}
+
+.main input[type='text'] {
+    height: 30px;
+    border-radius: 6px;
+    width: 80%;
+    margin-right: 8px;
+    padding-left: 5px;
+    border: 1px solid black;
+}
+
+.todoline {
+    color: red;
 }
