@@ -1,4 +1,3 @@
-import './App.scss';
 import '../../../node_modules/reset-css/reset.css';
 
 import * as React from 'react';
@@ -6,12 +5,19 @@ import { useState } from 'react';
 import { ChangeEvent } from 'react';
 
 import { Context } from '../../ListContext';
-import ToDoLine from '../ToDoLine/ToDoLine';
+import InputField from '../InputField/InputField';
+import Options from '../Options/Options';
+import ToDoLines from '../ToDoLines/ToDoLines';
+import css from './App.scss';
 
 export type ListItemType = {
   text: string;
   checked: boolean;
 };
+
+enum Keys {
+  Enter = 'Enter',
+}
 
 const App = () => {
   const array: ListItemType[] = [
@@ -40,8 +46,26 @@ const App = () => {
   };
 
   const enterKey = (event: any) => {
-    if (event.key === 'Enter') {
+    if (event.key === Keys.Enter) {
       addListItem();
+    }
+  };
+
+  const dispatch = (actionType, payload) => {
+    const index = payload;
+    switch (actionType) {
+      case 'ADD_ITEM':
+        setList([
+          ...list.slice(0, index),
+          { text: list[index].text, checked: !list[index].checked },
+          ...list.slice(index + 1),
+        ]);
+        break;
+      case 'DELETE_ITEM':
+        setList([...list.slice(0, index), ...list.slice(index + 1)]);
+        break;
+      default:
+        return;
     }
   };
 
@@ -49,30 +73,14 @@ const App = () => {
     <Context.Provider
       value={{
         List: list,
-        changeList: (value: ListItemType[]) => setList(value),
+        changeList: dispatch,
       }}
     >
-      <div className={'main'}>
-        <h1 className={'heading'}>To Do List</h1>
-        <input
-          className={'inputField'}
-          type={'text'}
-          placeholder={'What need to do...'}
-          value={inputState}
-          onChange={changeInput}
-          onKeyDown={enterKey}
-        />
-        {/*<button onClick={addListItem}>Add</button>*/}
-        <Context.Consumer>
-          {(Context) =>
-            Context.List.map((item: ListItemType, id: number) => (
-              <ToDoLine item={item} key={id} setList={setList} />
-            ))
-          }
-        </Context.Consumer>
-        <span>1 option </span>
-        <span>2 option </span>
-        <span>3 option </span>
+      <div className={css.main}>
+        <h1 className={css.heading}>To Do List</h1>
+        <InputField inputState={inputState} changeInput={changeInput} enterKey={enterKey} />
+        <ToDoLines setList={setList} />
+        <Options />
       </div>
     </Context.Provider>
   );

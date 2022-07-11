@@ -18,5 +18,11 @@
     "moduleResolution": "node",
     // Создавать ли соответствующие source map файлы ".map"?
     //"sourceMap": true
+    "plugins": [
+      {
+        //
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   }
 }
