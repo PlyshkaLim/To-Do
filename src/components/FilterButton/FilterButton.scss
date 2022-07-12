@@ -1,0 +1,18 @@
+$mar: 8px;
+.filterButton {
+
+  button {
+    font-size: 12px;
+    margin: $mar 0 $mar 0;
+    padding: 1px;
+    border: none;
+    background: none;
+  }
+
+  .buttonActive {
+    padding: 0;
+    border: 1px solid black;
+    border-radius: 4px;
+
+  }
+}
