@@ -1,10 +1,5 @@
 @import '../../variables.scss';
 
-$qwe: $basic-length * 3;
-$top: -5px;
-$left: -5px;
-$border-radius: 100%;
-
 .toDoLine {
   display: flex;
   flex-direction: row;
@@ -45,7 +40,6 @@ $border-radius: 100%;
     }
   }
 }
-
 
 .checked {
   color: gray;

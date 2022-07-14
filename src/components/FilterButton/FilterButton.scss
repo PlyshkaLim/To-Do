@@ -1,24 +1,21 @@
 @import '../../variables.scss';
 
-$button-padding: 4px;
-$color: rgba(0, 0, 0, 0.3);
-
 .filterButton {
   .activeButton {
-    padding: $button-padding - 1px;
-    border: 1px solid black;
-    border-radius: 4px;
+    padding: $filter-button-padding - 1px;
+    border: 1px solid $filter--border-color;
+    border-radius: $filter-border-radius;
   }
 
   button {
     font-size: $small-font-size;
     margin: $basic-length 0 $basic-length 0;
-    padding: $button-padding;
+    padding: $filter-button-padding;
 
     &:hover {
-      padding: $button-padding - 1px;
-      border: 1px solid $color;
-      border-radius: 4px;
+      padding: $filter-button-padding - 1px;
+      border: 1px solid $filter-hover-border-color;
+      border-radius: $filter-border-radius;
     }
   }
 }

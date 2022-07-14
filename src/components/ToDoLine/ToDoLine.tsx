@@ -1,10 +1,9 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { ChangeEvent, useContext, useState } from 'react';
+import { useState } from 'react';
 
-import { Context } from '../../ListContext';
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
-import { Actions, Keys } from '../Enums';
+import { Keys } from '../Enums';
 import HeavyCrossIcon from '../Icons/HeavyCrossIcon';
 import css from './ToDoLine.scss';
 
@@ -14,33 +13,37 @@ type ToDoLineProps = {
     checked: boolean;
   };
   key: number;
+  changeTextInLine: (index: number, input: string) => void;
+  deleteLine: (index: number) => void;
+  index: number;
+  switchCheckInLine: (index: number) => void;
 };
 
-const ToDoLine = ({ item }: ToDoLineProps) => {
-  const { List, changeList } = useContext(Context);
+const ToDoLine = ({
+  item,
+  changeTextInLine,
+  deleteLine,
+  index,
+  switchCheckInLine,
+}: ToDoLineProps) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [input1, setInput1] = useState<string>(item.text);
-  const index = List.indexOf(item);
-  const check = item.checked;
+  const [input, setInput] = useState<string>(item.text);
 
-  const onEnterKeyDown = (event: any) => {
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value);
+  };
+
+  const onEnterKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === Keys.Enter) {
-      setIsEdit(!isEdit);
-      setInput1(input1);
-      changeList(Actions.CHANGE_TEXT, [index, input1]);
+      onBlur();
     }
   };
 
   const onBlur = () => {
     setIsEdit(!isEdit);
-    setInput1(input1);
-    changeList(Actions.CHANGE_TEXT, [index, input1]);
+    setInput(input);
+    changeTextInLine(index, input);
   };
-
-  const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setInput1(event.target.value);
-  };
-
   return (
     <div className={css.toDoLine}>
       {isEdit ? (
@@ -49,24 +52,25 @@ const ToDoLine = ({ item }: ToDoLineProps) => {
           onKeyDown={onEnterKeyDown}
           onChange={handleChangeInput}
           onBlur={onBlur}
-          value={input1}
+          value={input}
           autoFocus
         />
       ) : (
         <>
-          <CustomCheckbox check={check} index={index} />
+          <CustomCheckbox
+            check={item.checked}
+            index={index}
+            switchCheckInLine={switchCheckInLine}
+          />
           <div
-            className={cn(css.listText, { [css.checked]: check })}
+            className={cn(css.listText, { [css.checked]: item.checked })}
             onDoubleClick={() => {
               setIsEdit(!isEdit);
             }}
           >
             {item.text}
           </div>
-          <button
-            className={css.buttonDelete}
-            onClick={() => changeList(Actions.DELETE_ITEM, index)}
-          >
+          <button className={css.buttonDelete} onClick={() => deleteLine(index)}>
             <HeavyCrossIcon />
           </button>
         </>

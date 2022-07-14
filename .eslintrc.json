@@ -9,7 +9,6 @@
     "prettier"
   ],
   "parser": "@babel/eslint-parser",
-  //"parser": "@typescript-eslint/parser",
   "plugins": [
     "react",
     "prettier",
@@ -17,25 +16,22 @@
     "@typescript-eslint"
   ],
   "rules": {
-    //  Подсвечивает ошибки из Prettier.
+    // Подсвечивает ошибки из Prettier.
     "prettier/prettier": "error",
-    // ; и , в конце
+    // Подставляет ; и , в конце
     "semi": "error",
     // Запретить использование необъявленных переменных
     "no-undef": 0,
-    // запрет неиспользуемых переменных
+    // Запрет неиспользуемых переменных
     "no-unused-vars": 0,
-    // sort import
+    // Сортировка import
     "simple-import-sort/sort": "error",
     // Make sure to remove or disable other sorting rules, such as sort-imports and import/order.
+    // Отклюячаем другие правила сортировки
     "sort-imports": 0,
     "import/order": 0,
+    // Подсвечивает any
     "@typescript-eslint/no-explicit-any": "error",
-    //"@typescript-eslint/rule-name": "error"
     "@typescript-eslint/no-unused-vars": 0
-  },
-  "ignorePatterns": [
-    "src/**/*.scss",
-    "src/**/*.css"
-  ]
+  }
 }

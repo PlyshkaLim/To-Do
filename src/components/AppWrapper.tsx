@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Context } from '../ListContext';
+import { ActionType, Context } from '../ListContext';
 import { array } from '../TestArray';
 import App from './App/App';
-import { Actions } from './Enums';
+import { ActionTypeEnum } from './Enums';
 
 export type ListItemType = {
   id: string;
@@ -46,7 +46,7 @@ const AppWrapper = () => {
     setList(list.map((item) => ({ id: item.id, text: item.text, checked: check })));
   };
 
-  const clearDone = () => {
+  const clearCompleted = () => {
     setList(list.filter((item) => item.checked === false));
   };
 
@@ -62,25 +62,25 @@ const AppWrapper = () => {
     }
   };
 
-  const dispatch = (actionType: Actions, payload?: any) => {
-    switch (actionType) {
-      case Actions.ADD_ITEM:
+  const dispatch = (action: ActionType) => {
+    switch (action.actionType) {
+      case ActionTypeEnum.ADD_ITEM:
         addItem();
         break;
-      case Actions.CHANGE_CHECK:
-        changeCheck(payload);
+      case ActionTypeEnum.CHANGE_CHECK:
+        changeCheck(action.payload);
         break;
-      case Actions.DELETE_ITEM:
-        deleteItem(payload);
+      case ActionTypeEnum.DELETE_ITEM:
+        deleteItem(action.payload);
         break;
-      case Actions.CHECK_ALL:
-        checkAll(payload);
+      case ActionTypeEnum.CHECK_ALL:
+        checkAll(action.payload);
         break;
-      case Actions.CLEAR_DONE:
-        clearDone();
+      case ActionTypeEnum.CLEAR_COMPLETED:
+        clearCompleted();
         break;
-      case Actions.CHANGE_TEXT:
-        changeText(payload[0], payload[1]);
+      case ActionTypeEnum.CHANGE_TEXT:
+        changeText(action.payload[0], action.payload[1]);
         break;
       default:
         return;

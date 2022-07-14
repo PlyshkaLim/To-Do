@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   entry: './src/components/index.tsx',
@@ -24,7 +23,6 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         use: [
           'style-loader',
-          //'css-modules-typescript-loader',
           {
             loader: 'css-loader',
             options: {
@@ -46,9 +44,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
-    // new StylelintPlugin({
-    //   files: ['**/*.css', '**/*.scss'],
-    // }),
   ],
   mode: 'development',
   devtool: 'source-map',

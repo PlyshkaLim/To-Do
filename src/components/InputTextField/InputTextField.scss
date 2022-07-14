@@ -1,0 +1,11 @@
+@import '../../variables.scss';
+
+.inputTextField {
+  font-size: $basic-font-size;
+  width: $basic-length * 40;
+  border-radius: $basic-length;
+  padding-left: $basic-length;
+  border: 1px solid black;
+  height: $basic-length * 4;
+  box-sizing: border-box;
+}

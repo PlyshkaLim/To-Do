@@ -1,21 +1,27 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
 
-import css from '../App/App.scss';
+import css from './InputTextField.scss';
 
 type InputFieldProps = {
   inputState: string;
   changeInput: (event: ChangeEvent<HTMLInputElement>) => void;
-  onEnterKeyDown: any;
+  onEnterKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  placeholder: string;
 };
 
-const InputField = ({ inputState, changeInput, onEnterKeyDown }: InputFieldProps) => {
+const InputTextField = ({
+  inputState,
+  changeInput,
+  onEnterKeyDown,
+  placeholder,
+}: InputFieldProps) => {
   return (
     <div>
       <input
-        className={css.inputField}
+        className={css.inputTextField}
         type={'text'}
-        placeholder={'What need to do...'}
+        placeholder={placeholder}
         value={inputState}
         onChange={changeInput}
         onKeyDown={onEnterKeyDown}
@@ -24,4 +30,4 @@ const InputField = ({ inputState, changeInput, onEnterKeyDown }: InputFieldProps
   );
 };
 
-export default InputField;
+export default InputTextField;

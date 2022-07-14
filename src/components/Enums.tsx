@@ -8,11 +8,11 @@ export enum Filter {
   Done = 'done',
 }
 
-export enum Actions {
+export enum ActionTypeEnum {
   ADD_ITEM = 'ADD_ITEM',
   DELETE_ITEM = 'DELETE_ITEM',
   CHANGE_CHECK = 'CHANGE_CHECK',
   CHECK_ALL = 'CHECK_ALL',
-  CLEAR_DONE = 'CLEAR_DONE',
+  CLEAR_COMPLETED = 'CLEAR_COMPLETED',
   CHANGE_TEXT = 'CHANGE_TEXT',
 }

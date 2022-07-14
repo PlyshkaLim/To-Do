@@ -3,3 +3,4 @@ webpack.config.js
 *.json
 *.html
 *.css
+*.scss

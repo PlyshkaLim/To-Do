@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import { Context } from '../../ListContext';
 import { ListItemType } from '../AppWrapper';
-import { Filter } from '../Enums';
+import { ActionTypeEnum, Filter } from '../Enums';
 import ToDoLine from '../ToDoLine/ToDoLine';
 
 type ToDoLinesProps = {
@@ -11,8 +11,7 @@ type ToDoLinesProps = {
 };
 
 const ToDoLines = ({ filter }: ToDoLinesProps) => {
-  const { List } = useContext(Context);
-
+  const { List, changeList } = useContext(Context);
   const getFilter = (item: ListItemType) => {
     if (filter === Filter.All) {
       return item.checked || !item.checked;
@@ -25,10 +24,33 @@ const ToDoLines = ({ filter }: ToDoLinesProps) => {
     }
   };
 
+  const changeTextInLine = (index: number, input: string) => {
+    changeList({ actionType: ActionTypeEnum.CHANGE_TEXT, payload: [index, input] });
+  };
+
+  const deleteLine = (index: number) => {
+    changeList({ actionType: ActionTypeEnum.DELETE_ITEM, payload: index });
+  };
+
+  const getIndex = (item: ListItemType) => {
+    return List.indexOf(item);
+  };
+
+  const switchCheckInLine = (index: number) => {
+    changeList({ actionType: ActionTypeEnum.CHANGE_CHECK, payload: index });
+  };
+
   return (
     <div>
       {List.filter((item) => getFilter(item)).map((item: ListItemType, id: number) => (
-        <ToDoLine item={item} key={id} />
+        <ToDoLine
+          item={item}
+          key={id}
+          changeTextInLine={changeTextInLine}
+          deleteLine={deleteLine}
+          index={getIndex(item)}
+          switchCheckInLine={switchCheckInLine}
+        />
       ))}
     </div>
   );

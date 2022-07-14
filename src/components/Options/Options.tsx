@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-import { Context } from '../../ListContext';
-import { Actions, Filter } from '../Enums';
+import { Filter } from '../Enums';
 import FilterButton from '../FilterButton/FilterButton';
 import CheckMarkIcon from '../Icons/CheckMarkIcon';
 import css from './Options.scss';
@@ -10,11 +9,18 @@ import css from './Options.scss';
 type OptionsProps = {
   filter: string;
   setFilter: Dispatch<SetStateAction<string>>;
+  countChecked: number;
+  checkAllChecksInLines: (changeOn: boolean) => void;
+  clearAllCompletedInLines: () => void;
 };
 
-const Options = ({ filter, setFilter }: OptionsProps) => {
-  const { List, changeList } = useContext(Context);
-  const countChecked = List.filter((item) => item.checked === true).length;
+const Options = ({
+  filter,
+  setFilter,
+  countChecked,
+  checkAllChecksInLines,
+  clearAllCompletedInLines,
+}: OptionsProps) => {
   const [changeOn, setChangeOn] = useState<boolean>(true);
 
   const changeFilter = (filterName: Filter) => {
@@ -22,7 +28,7 @@ const Options = ({ filter, setFilter }: OptionsProps) => {
   };
 
   const changeAllChecks = () => {
-    changeList(Actions.CHECK_ALL, changeOn);
+    checkAllChecksInLines(changeOn);
     setChangeOn(!changeOn);
   };
 
@@ -53,7 +59,7 @@ const Options = ({ filter, setFilter }: OptionsProps) => {
       </div>
       <button
         className={css.buttonClearDone}
-        onClick={() => changeList(Actions.CLEAR_DONE)}
+        onClick={() => clearAllCompletedInLines}
         disabled={countChecked === 0}
       >
         Clear done
