@@ -1,18 +1,24 @@
-$mar: 8px;
+@import '../../variables.scss';
+
+$button-padding: 4px;
+$color: rgba(0, 0, 0, 0.3);
+
 .filterButton {
-
-  button {
-    font-size: 12px;
-    margin: $mar 0 $mar 0;
-    padding: 1px;
-    border: none;
-    background: none;
-  }
-
-  .buttonActive {
-    padding: 0;
+  .activeButton {
+    padding: $button-padding - 1px;
     border: 1px solid black;
     border-radius: 4px;
+  }
 
+  button {
+    font-size: $small-font-size;
+    margin: $basic-length 0 $basic-length 0;
+    padding: $button-padding;
+
+    &:hover {
+      padding: $button-padding - 1px;
+      border: 1px solid $color;
+      border-radius: 4px;
+    }
   }
 }

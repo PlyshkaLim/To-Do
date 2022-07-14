@@ -1,38 +1,54 @@
+@import '../../variables.scss';
+
+$qwe: $basic-length * 3;
+$top: -5px;
+$left: -5px;
+$border-radius: 100%;
+
 .toDoLine {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 32px;
+  min-height: $basic-length * 4;
+  width: $basic-length * 40;
   border: 1px solid black;
   border-radius: 6px;
   box-shadow: 3px 3px 1px 0 rgba(34, 60, 80, 0.2);
-  margin: 8px 0;
+  margin: $basic-length 0;
 
-  .customCheckbox {
-    margin-right: 8px;
+  .inputChange {
+    margin-left: 24px;
+    border: 1px solid black;
+    padding: $basic-length 0;
+    font-size: 16px;
+    width: $basic-length * 33;
+    box-shadow: 2px 2px 4px 0 rgba(34, 60, 80, 0.1) inset,
+    -2px -2px 4px 0px rgba(34, 60, 80, 0.1) inset;
+  }
+
+  .listText {
+    flex-grow: 1;
+    font-size: $basic-font-size;
+    width: $basic-length * 32;
+    word-wrap: break-word;
+    margin: $basic-length;
   }
 
   .buttonDelete {
-    flex-grow: 1;
     display: flex;
     flex-direction: row-reverse;
-    margin-right: 8px;
+    margin-right: $basic-length;
+    color: $red-color-light;
 
-    button {
-      border: none;
-      background: none;
-      color: rgba(255, 0, 0, 0.5);
-
-      &:hover {
-        color: rgba(255, 0, 0, 1);
-      }
+    &:hover {
+      color: $red-color;
     }
   }
 }
 
+
 .checked {
   color: gray;
   text-decoration: line-through;
-
 }
 

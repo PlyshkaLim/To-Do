@@ -1,17 +1,19 @@
 import * as React from 'react';
+import { useContext } from 'react';
 
 import { Context } from '../../ListContext';
-import { ListItemType } from '../App/App';
+import { ListItemType } from '../AppWrapper';
 import { Filter } from '../Enums';
 import ToDoLine from '../ToDoLine/ToDoLine';
 
-type PropsType = {
-  setList: any;
+type ToDoLinesProps = {
   filter: string;
 };
 
-const ToDoLines = ({ setList, filter }: PropsType) => {
-  const setFilter = (item: any) => {
+const ToDoLines = ({ filter }: ToDoLinesProps) => {
+  const { List } = useContext(Context);
+
+  const getFilter = (item: ListItemType) => {
     if (filter === Filter.All) {
       return item.checked || !item.checked;
     }
@@ -25,13 +27,9 @@ const ToDoLines = ({ setList, filter }: PropsType) => {
 
   return (
     <div>
-      <Context.Consumer>
-        {(Context) =>
-          Context.List.filter((item) => setFilter(item)).map((item: ListItemType, id: number) => (
-            <ToDoLine item={item} key={id} setList={setList} />
-          ))
-        }
-      </Context.Consumer>
+      {List.filter((item) => getFilter(item)).map((item: ListItemType, id: number) => (
+        <ToDoLine item={item} key={id} />
+      ))}
     </div>
   );
 };

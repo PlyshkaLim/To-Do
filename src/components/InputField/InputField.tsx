@@ -1,14 +1,15 @@
 import * as React from 'react';
+import { ChangeEvent } from 'react';
 
 import css from '../App/App.scss';
 
-type PropsType = {
+type InputFieldProps = {
   inputState: string;
-  changeInput: any;
-  enterKey: any;
+  changeInput: (event: ChangeEvent<HTMLInputElement>) => void;
+  onEnterKeyDown: any;
 };
 
-const InputField = ({ inputState, changeInput, enterKey }: PropsType) => {
+const InputField = ({ inputState, changeInput, onEnterKeyDown }: InputFieldProps) => {
   return (
     <div>
       <input
@@ -17,7 +18,7 @@ const InputField = ({ inputState, changeInput, enterKey }: PropsType) => {
         placeholder={'What need to do...'}
         value={inputState}
         onChange={changeInput}
-        onKeyDown={enterKey}
+        onKeyDown={onEnterKeyDown}
       />
     </div>
   );

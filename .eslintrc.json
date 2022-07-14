@@ -3,15 +3,18 @@
     "browser": true
   },
   "extends": [
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "eslint:recommended",
     "prettier"
   ],
   "parser": "@babel/eslint-parser",
+  //"parser": "@typescript-eslint/parser",
   "plugins": [
     "react",
     "prettier",
-    "simple-import-sort"
+    "simple-import-sort",
+    "@typescript-eslint"
   ],
   "rules": {
     //  Подсвечивает ошибки из Prettier.
@@ -26,6 +29,13 @@
     "simple-import-sort/sort": "error",
     // Make sure to remove or disable other sorting rules, such as sort-imports and import/order.
     "sort-imports": 0,
-    "import/order": 0
-  }
+    "import/order": 0,
+    "@typescript-eslint/no-explicit-any": "error",
+    //"@typescript-eslint/rule-name": "error"
+    "@typescript-eslint/no-unused-vars": 0
+  },
+  "ignorePatterns": [
+    "src/**/*.scss",
+    "src/**/*.css"
+  ]
 }

@@ -1,5 +1,6 @@
-$mar: 8px;
-$qwe: 80px;
+@import '../../variables.scss';
+
+$qwe: $basic-length * 12;
 
 .options {
   display: flex;
@@ -8,22 +9,25 @@ $qwe: 80px;
   border-bottom: 1px solid gray;
 
   button {
-
-    font-size: 12px;
-    margin: $mar 0 $mar 0;
+    font-size: $small-font-size;
+    margin: $basic-length 0 $basic-length 0;
   }
 
   .buttonCheckAll {
-    border: none;
-    background: none;
     width: $qwe;
     text-align: left;
     margin: 0;
+
+    &:hover {
+      color: green;
+    }
   }
 
   .filters {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-around;
 
     .buttonActive {
       border: 1px solid black;
@@ -33,12 +37,10 @@ $qwe: 80px;
 
   .buttonClearDone {
     width: $qwe;
-    border: none;
-    background: none;
     text-align: right;
 
     &:disabled {
-      color: white;
+      color: rgba(0, 0, 0, 0);
     }
   }
 }

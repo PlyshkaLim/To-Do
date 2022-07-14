@@ -14,4 +14,5 @@ export enum Actions {
   CHANGE_CHECK = 'CHANGE_CHECK',
   CHECK_ALL = 'CHECK_ALL',
   CLEAR_DONE = 'CLEAR_DONE',
+  CHANGE_TEXT = 'CHANGE_TEXT',
 }

@@ -1,21 +1,26 @@
-
+@import '../../variables.scss';
 
 .heading {
-  font-size: 28px;
-  margin: 16px 0;
+  font-size: $big-font-size;
+  margin: $basic-length * 2 0;
 }
 
 .main {
   font-family: Roboto, sans-serif;
-  width: 320px;
+  width: $basic-length * 40;
   margin: auto;
 
   .inputField {
-    width: 320px;
-    border-radius: 8px;
-    padding-left: 8px;
+    font-size: $basic-font-size;
+    width: $basic-length * 40;
+    border-radius: $basic-length;
+    padding-left: $basic-length;
     border: 1px solid black;
-    height: 32px;
+    height: $basic-length * 4;
     box-sizing: border-box;
+  }
+  .counter {
+    font-size: $small-font-size;
+    margin-top: $basic-length;
   }
 }
