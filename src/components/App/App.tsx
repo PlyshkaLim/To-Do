@@ -6,6 +6,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useContext, useState } from 'rea
 import { Context } from '../../ListContext';
 import { ActionTypeEnum, Filter, Keys } from '../Enums';
 import InputTextField from '../InputTextField/InputTextField';
+import Modal from '../Modal/Modal';
 import Options from '../Options/Options';
 import ToDoLines from '../ToDoLines/ToDoLines';
 import css from './App.scss';
@@ -16,6 +17,8 @@ type AppProps = {
 };
 
 const App = ({ inputState, setInputState }: AppProps) => {
+  const [isModal, setIsModal] = useState<boolean>(false);
+
   const [filter, setFilter] = useState<string>(Filter.All);
   const { List, changeList } = useContext(Context);
   const countChecked = List.filter((item) => item.checked === true).length;
@@ -40,7 +43,12 @@ const App = ({ inputState, setInputState }: AppProps) => {
 
   return (
     <div className={css.main}>
+      <button onClick={() => setIsModal(true)}>show modal</button>
+      <Modal isModal={isModal} setIsModal={setIsModal}>
+        123 123
+      </Modal>
       <h1 className={css.heading}>To Do List</h1>
+
       <InputTextField
         inputState={inputState}
         changeInput={changeInput}

@@ -51,6 +51,6 @@ export type myContext = {
 export const Context = React.createContext<myContext>({
   List: [] as ListItemType[],
   changeList: (action: ActionType) => {
-    throw new Error('Not impliment method!');
+    throw new Error('Not implement method!');
   },
 });
