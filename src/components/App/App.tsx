@@ -1,4 +1,5 @@
 import '../../reset.css';
+import 'tippy.js/dist/tippy.css';
 
 import * as React from 'react';
 import { ChangeEvent, Dispatch, SetStateAction, useContext, useState } from 'react';
