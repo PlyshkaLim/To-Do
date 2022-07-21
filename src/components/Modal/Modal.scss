@@ -1,5 +1,33 @@
+@import '../../variables.scss';
+
+$local-width: 30;
+$local-height: 15;
+
 .modal {
-  position: relative;
+  position: absolute;
   top: 0;
-  box-shadow: 0 0 0 1px black;
+  left: 0;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  font-size: 16px;
+  background-color: white;
+  width: $basic-length * $local-width;
+  height: $basic-length * $local-height;
+  margin: $basic-length * 5 auto;
+  padding: $basic-length * 4 $basic-length * 2 $basic-length * 2 $basic-length * 2;
+  box-sizing: border-box;
+  border-radius: $basic-length;
+}
+
+.closeIcon {
+  position: absolute;
+  right: $basic-length * 2;
+  top: $basic-length * 2;
 }

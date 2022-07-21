@@ -18,7 +18,7 @@ $indent: $basic-length * 3;
         position: absolute;
         width: 5px;
         height: 10px;
-        border: solid #1E80EF;
+        border: solid $checkbox-border-color;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
         top: 5px;
@@ -28,8 +28,8 @@ $indent: $basic-length * 3;
 
     // Focused
     &:focus + .checkBox {
-      box-shadow: 0 0 0 1px #1E80EF,
-      0 0 0 2px #7ED321;
+      box-shadow: 0 0 0 1px $checkbox-border-color,
+      0 0 0 2px $checkbox-border-hover-color;
     }
 
     // Disabled
@@ -49,7 +49,7 @@ $indent: $basic-length * 3;
     margin-left: -20px;
     margin-top: -12px;
     border-radius: $checkbox-border-radius;
-    box-shadow: 0 0 0 1px #1E80EF;
+    box-shadow: 0 0 0 1px $checkbox-border-color;
     background-color: white;
   }
 }

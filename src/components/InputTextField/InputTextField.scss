@@ -5,7 +5,7 @@
   width: $basic-length * 40;
   border-radius: $basic-length;
   padding-left: $basic-length;
-  border: 1px solid black;
+  border: 1px solid $border-color;
   height: $basic-length * 4;
   box-sizing: border-box;
 }

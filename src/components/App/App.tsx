@@ -19,8 +19,8 @@ type AppProps = {
 
 const App = ({ inputState, setInputState }: AppProps) => {
   const [isModal, setIsModal] = useState<boolean>(false);
-
   const [filter, setFilter] = useState<string>(Filter.All);
+
   const { List, changeList } = useContext(Context);
   const countChecked = List.filter((item) => item.checked === true).length;
 
@@ -44,12 +44,12 @@ const App = ({ inputState, setInputState }: AppProps) => {
 
   return (
     <div className={css.main}>
-      <button onClick={() => setIsModal(true)}>show modal</button>
+      <button onClick={() => setIsModal(true)}>Show modal</button>
       <Modal isModal={isModal} setIsModal={setIsModal}>
-        123 123
+        This is modal.
       </Modal>
-      <h1 className={css.heading}>To Do List</h1>
 
+      <h1 className={css.heading}>To Do List</h1>
       <InputTextField
         inputState={inputState}
         changeInput={changeInput}
