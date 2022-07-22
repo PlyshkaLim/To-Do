@@ -1,11 +1,12 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 import { Keys } from '../Enums';
 import HeavyCrossIcon from '../Icons/HeavyCrossIcon';
 import css from './ToDoLine.scss';
+import Tippy from '@tippyjs/react';
 
 type ToDoLineProps = {
   item: {
@@ -44,6 +45,8 @@ const ToDoLine = ({
     setInput(input);
     changeTextInLine(index, input);
   };
+  const newRef = useRef();
+
   return (
     <div className={css.toDoLine}>
       {isEdit ? (
@@ -62,7 +65,9 @@ const ToDoLine = ({
             index={index}
             switchCheckInLine={switchCheckInLine}
           />
+          <Tippy content={'123'} placement={'top'} visible={true} reference={newRef} />
           <div
+            ref={newRef}
             className={cn(css.listText, { [css.checked]: item.checked })}
             onDoubleClick={() => {
               setIsEdit(!isEdit);
