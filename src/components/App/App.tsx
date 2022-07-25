@@ -7,10 +7,12 @@ import { ChangeEvent, Dispatch, SetStateAction, useContext, useRef, useState } f
 import { Context } from '../../ListContext';
 import { ActionTypeEnum, Filter, Keys } from '../Enums';
 import InputTextField from '../InputTextField/InputTextField';
-import Modal from '../Modal/Modal';
 import Options from '../Options/Options';
+import SideMenuButtons from '../SideMenuButtons/SideMenuButtons';
 import TippyComponent from '../TippyComponent';
 import ToDoLines from '../ToDoLines/ToDoLines';
+import ToolTipExample from '../ToolTipExample/ToolTipExample';
+import ToolTipTest from '../ToolTipTest/ToolTipTest';
 import css from './App.scss';
 
 type AppProps = {
@@ -44,13 +46,17 @@ const App = ({ inputState, setInputState }: AppProps) => {
   };
   const [isTipsVisible, setIsTipsVisible] = useState<boolean>(false);
   const [refIndex, setRefIndex] = useState<number>(0);
-  const inputRef = { ref: useRef(), text: 'Write what need to do' };
-  const optionCheckAllRef = { ref: useRef(), text: 'Mark all tasks completed' };
-  const optionAllRef = { ref: useRef(), text: 'Show all tasks' };
-  const optionActiveRef = { ref: useRef(), text: 'Show active tasks' };
-  const optionDoneRef = { ref: useRef(), text: 'Show completed tasks' };
-  const optionClearDoneRef = { ref: useRef(), text: 'Clear all completed tasks' };
-  const checkboxRef = { ref: useRef(), text: 'Mark done task' };
+  const inputRef = { ref: useRef(), text: 'Write what need to do', direction: 'top' };
+  const optionCheckAllRef = { ref: useRef(), text: 'Mark all tasks completed', direction: 'left' };
+  const optionAllRef = { ref: useRef(), text: 'Show all tasks', direction: 'top' };
+  const optionActiveRef = { ref: useRef(), text: 'Show active tasks', direction: 'top' };
+  const optionDoneRef = { ref: useRef(), text: 'Show completed tasks', direction: 'top' };
+  const optionClearDoneRef = {
+    ref: useRef(),
+    text: 'Clear all completed tasks',
+    direction: 'right',
+  };
+  const checkboxRef = { ref: useRef(), text: 'Mark done task', direction: 'top' };
   const refArray = [
     inputRef,
     optionCheckAllRef,
@@ -58,37 +64,32 @@ const App = ({ inputState, setInputState }: AppProps) => {
     optionActiveRef,
     optionDoneRef,
     optionClearDoneRef,
-    checkboxRef,
   ];
 
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <div className={css.app}>
       <div className={css.sideMenu}>
-        <button onClick={() => setIsModal(true)}>Show modal</button>
-        <Modal isModal={isModal} setIsModal={setIsModal}>
-          This is modal.
-        </Modal>
-        <button onClick={() => setIsTipsVisible(!isTipsVisible)}>
-          {isTipsVisible ? <>Hide </> : <>Show </>}
-          tips
-        </button>
-        <button
-          onClick={() => {
-            setRefIndex((refIndex - 1 + refArray.length) % refArray.length);
-          }}
-        >
-          Previous tip
-        </button>
-        <button
-          onClick={() => {
-            setRefIndex((refIndex + 1) % refArray.length);
-          }}
-        >
-          Next tip
-        </button>
+        <SideMenuButtons
+          isModal={isModal}
+          setIsModal={setIsModal}
+          isTipsVisible={isTipsVisible}
+          setIsTipsVisible={setIsTipsVisible}
+          refIndex={refIndex}
+          setRefIndex={setRefIndex}
+          refArray={refArray}
+        />
       </div>
       <div className={css.main}>
-        <h1 className={css.heading}>To Do List</h1>
+        <h1 className={css.heading} aria-describedby="tooltip">
+          To Do List
+        </h1>
+        <ToolTipExample label="My tooltip" placement={'right'} open={open} setOpen={setOpen}>
+          <button onClick={() => setOpen(true)} className={css.buttonTip}>
+            Click me
+          </button>
+        </ToolTipExample>
+        {/*<ToolTipTest text={'qweasd'} />*/}
         <InputTextField
           newref={inputRef}
           inputState={inputState}
@@ -114,7 +115,6 @@ const App = ({ inputState, setInputState }: AppProps) => {
           newRef={refArray[refIndex].ref}
           tippyContent={refArray[refIndex].text}
           visible={isTipsVisible}
-          id={'inputField'}
         />
       </div>
     </div>

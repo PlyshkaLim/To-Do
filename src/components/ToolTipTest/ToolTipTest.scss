@@ -1,0 +1,30 @@
+#tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #222;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 90%;
+  pointer-events: none;
+}
+
+.tipBody {
+  padding: 16px;
+  background: #0697FF;
+  box-shadow: 2px 8px 16px rgba(6, 151, 255, 0.2), 0px -2px 4px rgba(6, 151, 255, 0.2);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: white;
+  margin-top: 10px;
+}
+
+.tipArrow {
+  background: #0697FF;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+}
