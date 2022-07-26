@@ -44,7 +44,8 @@ const App = ({ inputState, setInputState }: AppProps) => {
   const clearAllCompletedInLines = () => {
     changeList({ actionType: ActionTypeEnum.CLEAR_COMPLETED });
   };
-  const [isTipsVisible, setIsTipsVisible] = useState<boolean>(true);
+
+  const [isTipsVisible, setIsTipsVisible] = useState<boolean>(false);
   const [refIndex, setRefIndex] = useState<number>(0);
   const inputRef = { ref: useRef(), text: 'Write what need to do', direction: 'top' };
   const optionCheckAllRef = { ref: useRef(), text: 'Mark all tasks completed', direction: 'left' };
@@ -56,7 +57,7 @@ const App = ({ inputState, setInputState }: AppProps) => {
     text: 'Clear all completed tasks',
     direction: 'right',
   };
-  const checkboxRef = { ref: useRef(), text: 'Mark done task', direction: 'top' };
+  //const checkboxRef = { ref: useRef(), text: 'Mark done task', direction: 'top' };
   const refArray = [
     inputRef,
     optionCheckAllRef,
@@ -84,11 +85,6 @@ const App = ({ inputState, setInputState }: AppProps) => {
         <h1 className={css.heading} aria-describedby="tooltip">
           To Do List
         </h1>
-        {/*<ToolTipExample label="My tooltip" placement={'right'} open={openToolTipExample} setOpen={setOpenToolTipExample}>
-          <button onClick={() => setOpenToolTipExample(true)} className={css.buttonTip}>
-            Click me
-          </button>
-        </ToolTipExample>*/}
         {/*<ToolTipTest text={'qweasd'} />*/}
         <InputTextField
           newref={inputRef}
@@ -111,6 +107,17 @@ const App = ({ inputState, setInputState }: AppProps) => {
         />
         <ToDoLines filter={filter} />
         <div className={css.counter}>{List.length} items left</div>
+        <ToolTipExample
+          header={'Header'}
+          content={'My tooltip'}
+          placement={'right'}
+          open={openToolTipExample}
+          setOpen={setOpenToolTipExample}
+        >
+          <button onClick={() => setOpenToolTipExample(true)} className={css.buttonTip}>
+            Click me
+          </button>
+        </ToolTipExample>
         <TippyComponent
           newRef={refArray[refIndex].ref}
           tippyContent={refArray[refIndex].text}

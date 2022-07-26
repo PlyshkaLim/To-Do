@@ -12,14 +12,14 @@ type TippyComponentType = {
   direction?: any;
 };
 
-const TippyComponent = ({ newRef, tippyContent, visible, direction }: TippyComponentType) => {
+const TippyComponent = ({
+  newRef,
+  tippyContent,
+  visible,
+  direction = 'top',
+}: TippyComponentType) => {
   return (
-    <Tippy
-      content={tippyContent}
-      placement={direction ?? 'top'}
-      visible={visible}
-      reference={newRef}
-    />
+    <Tippy content={tippyContent} placement={direction} visible={visible} reference={newRef} />
   );
 };
 

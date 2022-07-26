@@ -10,22 +10,24 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import * as React from 'react';
-import { cloneElement, useMemo } from 'react';
+import { cloneElement, Dispatch, SetStateAction, useMemo } from "react";
 import { mergeRefs } from 'react-merge-refs';
 
 import css from './ToolTipExample.scss';
 
 interface ToolTipExampleProps {
-  label: string;
+  header: string;
+  content: string;
   placement?: Placement;
   children: JSX.Element;
   open: boolean;
-  setOpen: any;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const ToolTipExample = ({
   children,
-  label,
+  header,
+  content,
   placement = 'top',
   open,
   setOpen,
@@ -62,7 +64,8 @@ const ToolTipExample = ({
             },
           })}
         >
-          {label}
+          <div>{header}</div>
+          <div>{content}</div>
           <div className={css.tipCloseCross} onClick={() => setOpen(false)}>
             x
           </div>
