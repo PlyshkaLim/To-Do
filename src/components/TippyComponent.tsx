@@ -1,29 +1,25 @@
+import './tippyCustom.css';
+
 import Tippy from '@tippyjs/react';
 import * as React from 'react';
 import { RefObject } from 'react';
-import { Placement } from 'tippy.js';
-//import Tippy from '@tippyjs/react/headless';
+//import 'tippy.js/dist/tippy.css';
 
 type TippyComponentType = {
   newRef: RefObject<HTMLDivElement>;
   tippyContent: string;
   visible: boolean;
-  direction?: Placement;
+  direction?: any;
 };
 
-const TippyComponent = ({
-  newRef,
-  tippyContent,
-  visible,
-  direction = 'top',
-}: TippyComponentType) => {
+const TippyComponent = ({ newRef, tippyContent, visible, direction }: TippyComponentType) => {
   return (
-    <Tippy content={tippyContent} placement={direction} visible={visible} reference={newRef} />
-    // <Tippy
-    //   visible={visible}
-    //   reference={newRef}
-    //   render={(attrs) => <div {...attrs}>{tippyContent}</div>}
-    // />
+    <Tippy
+      content={tippyContent}
+      placement={direction ?? 'top'}
+      visible={visible}
+      reference={newRef}
+    />
   );
 };
 

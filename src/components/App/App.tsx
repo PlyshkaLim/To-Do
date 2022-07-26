@@ -1,6 +1,6 @@
 import '../../reset.css';
-import 'tippy.js/dist/tippy.css';
 
+//import 'tippy.js/dist/tippy.css';
 import * as React from 'react';
 import { ChangeEvent, Dispatch, SetStateAction, useContext, useRef, useState } from 'react';
 
@@ -44,7 +44,7 @@ const App = ({ inputState, setInputState }: AppProps) => {
   const clearAllCompletedInLines = () => {
     changeList({ actionType: ActionTypeEnum.CLEAR_COMPLETED });
   };
-  const [isTipsVisible, setIsTipsVisible] = useState<boolean>(false);
+  const [isTipsVisible, setIsTipsVisible] = useState<boolean>(true);
   const [refIndex, setRefIndex] = useState<number>(0);
   const inputRef = { ref: useRef(), text: 'Write what need to do', direction: 'top' };
   const optionCheckAllRef = { ref: useRef(), text: 'Mark all tasks completed', direction: 'left' };
@@ -66,7 +66,7 @@ const App = ({ inputState, setInputState }: AppProps) => {
     optionClearDoneRef,
   ];
 
-  const [open, setOpen] = useState<boolean>(false);
+  const [openToolTipExample, setOpenToolTipExample] = useState<boolean>(false);
   return (
     <div className={css.app}>
       <div className={css.sideMenu}>
@@ -84,11 +84,11 @@ const App = ({ inputState, setInputState }: AppProps) => {
         <h1 className={css.heading} aria-describedby="tooltip">
           To Do List
         </h1>
-        <ToolTipExample label="My tooltip" placement={'right'} open={open} setOpen={setOpen}>
-          <button onClick={() => setOpen(true)} className={css.buttonTip}>
+        {/*<ToolTipExample label="My tooltip" placement={'right'} open={openToolTipExample} setOpen={setOpenToolTipExample}>
+          <button onClick={() => setOpenToolTipExample(true)} className={css.buttonTip}>
             Click me
           </button>
-        </ToolTipExample>
+        </ToolTipExample>*/}
         {/*<ToolTipTest text={'qweasd'} />*/}
         <InputTextField
           newref={inputRef}
@@ -115,6 +115,7 @@ const App = ({ inputState, setInputState }: AppProps) => {
           newRef={refArray[refIndex].ref}
           tippyContent={refArray[refIndex].text}
           visible={isTipsVisible}
+          direction={refArray[refIndex].direction}
         />
       </div>
     </div>

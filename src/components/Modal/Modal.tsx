@@ -25,9 +25,9 @@ const Modal = (props: any) => {
       {props.isModal ? (
         <div className={css.modal}>
           <div className={css.modalContent}>
-            <div className={css.closeIcon} onClick={() => props.setIsModal(false)}>
+            <button className={css.closeIcon} onClick={() => props.setIsModal(false)}>
               <HeavyCrossIcon />
-            </div>
+            </button>
             {props.children}
           </div>
         </div>
