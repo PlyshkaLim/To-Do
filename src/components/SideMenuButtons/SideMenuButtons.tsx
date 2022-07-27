@@ -11,6 +11,7 @@ const SideMenuButtons = ({
   refIndex,
   setRefIndex,
   refArray,
+  setOpenPopover,
 }: any) => {
   return (
     <div className={css.sideMenu}>
@@ -38,6 +39,7 @@ const SideMenuButtons = ({
           Next tip
         </button>
       </div>
+      <button onClick={() => setOpenPopover(true)}>Click to open popover</button>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import * as React from 'react';
 import { ChangeEvent, Dispatch, SetStateAction, useContext, useRef, useState } from 'react';
 
 import { Context } from '../../ListContext';
+import Dialog from '../Dialog/Dialog';
 import { ActionTypeEnum, Filter, Keys } from '../Enums';
 import InputTextField from '../InputTextField/InputTextField';
 import Options from '../Options/Options';
@@ -14,6 +15,8 @@ import ToDoLines from '../ToDoLines/ToDoLines';
 import ToolTipExample from '../ToolTipExample/ToolTipExample';
 import ToolTipTest from '../ToolTipTest/ToolTipTest';
 import css from './App.scss';
+import { Popover } from '../Popover/Popover';
+import PopoverWrapper from '../PopoverWrapper/PopoverWrapper';
 
 type AppProps = {
   inputState: string;
@@ -68,6 +71,8 @@ const App = ({ inputState, setInputState }: AppProps) => {
   ];
 
   const [openToolTipExample, setOpenToolTipExample] = useState<boolean>(false);
+  const [openPopover, setOpenPopover] = useState(false);
+
   return (
     <div className={css.app}>
       <div className={css.sideMenu}>
@@ -79,6 +84,7 @@ const App = ({ inputState, setInputState }: AppProps) => {
           refIndex={refIndex}
           setRefIndex={setRefIndex}
           refArray={refArray}
+          setOpenPopover={setOpenPopover}
         />
       </div>
       <div className={css.main}>
@@ -124,6 +130,24 @@ const App = ({ inputState, setInputState }: AppProps) => {
           visible={isTipsVisible}
           direction={refArray[refIndex].direction}
         />
+        {/*<Dialog
+          render={({ close, labelId, descriptionId }) => (
+            <>
+              <h1 id={labelId}>This is a dialog!</h1>
+              <p id={descriptionId}>Now that we've got your attention, you can close this.</p>
+              <button onClick={close}>Close</button>
+            </>
+          )}
+        >
+          <button>Open dialog</button>
+        </Dialog>*/}
+        <br />
+        <PopoverWrapper openPopover={openPopover} setOpenPopover={setOpenPopover}>
+          <div>123456</div>
+        </PopoverWrapper>
+        <PopoverWrapper openPopover={openPopover} setOpenPopover={setOpenPopover}>
+          <div>123456</div>
+        </PopoverWrapper>
       </div>
     </div>
   );

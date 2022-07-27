@@ -10,7 +10,7 @@ import {
   useRole,
 } from '@floating-ui/react-dom-interactions';
 import * as React from 'react';
-import { cloneElement, Dispatch, SetStateAction, useMemo } from "react";
+import { Dispatch, SetStateAction, cloneElement, useMemo } from 'react';
 import { mergeRefs } from 'react-merge-refs';
 
 import css from './ToolTipExample.scss';
@@ -35,7 +35,8 @@ const ToolTipExample = ({
   const { x, y, reference, floating, strategy, context } = useFloating({
     placement,
     open,
-    onOpenChange: setOpen,
+    //onOpenChange: setOpen,
+    // какое-либо изменение положения или предоставление полезных данных потребителю
     middleware: [offset(8), flip()],
     whileElementsMounted: autoUpdate,
   });
@@ -66,9 +67,7 @@ const ToolTipExample = ({
         >
           <div>{header}</div>
           <div>{content}</div>
-          <div className={css.tipCloseCross} onClick={() => setOpen(false)}>
-            x
-          </div>
+          <div className={css.tipCloseCross}>x</div>
         </div>
       )}
     </>
