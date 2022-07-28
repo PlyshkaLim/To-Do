@@ -9,14 +9,13 @@ import Dialog from '../Dialog/Dialog';
 import { ActionTypeEnum, Filter, Keys } from '../Enums';
 import InputTextField from '../InputTextField/InputTextField';
 import Options from '../Options/Options';
+import PopoverWrapper from '../PopoverWrapper/PopoverWrapper';
 import SideMenuButtons from '../SideMenuButtons/SideMenuButtons';
 import TippyComponent from '../TippyComponent';
 import ToDoLines from '../ToDoLines/ToDoLines';
 import ToolTipExample from '../ToolTipExample/ToolTipExample';
 import ToolTipTest from '../ToolTipTest/ToolTipTest';
 import css from './App.scss';
-import { Popover } from '../Popover/Popover';
-import PopoverWrapper from '../PopoverWrapper/PopoverWrapper';
 
 type AppProps = {
   inputState: string;
@@ -72,7 +71,15 @@ const App = ({ inputState, setInputState }: AppProps) => {
 
   const [openToolTipExample, setOpenToolTipExample] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState(false);
-
+  const [currentPopover, setCurrentPopover] = useState<number>(0);
+  const popoverArray = [
+    {
+      order: 0,
+    },
+    {
+      order: 1,
+    },
+  ];
   return (
     <div className={css.app}>
       <div className={css.sideMenu}>
@@ -85,6 +92,9 @@ const App = ({ inputState, setInputState }: AppProps) => {
           setRefIndex={setRefIndex}
           refArray={refArray}
           setOpenPopover={setOpenPopover}
+          currentPopover={currentPopover}
+          setCurrentPopover={setCurrentPopover}
+          popoverArrayLength={popoverArray.length}
         />
       </div>
       <div className={css.main}>
@@ -142,11 +152,21 @@ const App = ({ inputState, setInputState }: AppProps) => {
           <button>Open dialog</button>
         </Dialog>*/}
         <br />
-        <PopoverWrapper openPopover={openPopover} setOpenPopover={setOpenPopover}>
+        <PopoverWrapper
+          openPopover={openPopover}
+          setOpenPopover={setOpenPopover}
+          thisOrder={0}
+          currentOrder={popoverArray[currentPopover].order}
+        >
           <div>123456</div>
         </PopoverWrapper>
-        <PopoverWrapper openPopover={openPopover} setOpenPopover={setOpenPopover}>
-          <div>123456</div>
+        <PopoverWrapper
+          openPopover={openPopover}
+          setOpenPopover={setOpenPopover}
+          thisOrder={1}
+          currentOrder={popoverArray[currentPopover].order}
+        >
+          <div>123456789</div>
         </PopoverWrapper>
       </div>
     </div>

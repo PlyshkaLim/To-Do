@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { Popover } from '../Popover/Popover';
 
 const PopoverContentComponent = ({ labelId, descriptionId, close }: any) => {
@@ -8,21 +9,38 @@ const PopoverContentComponent = ({ labelId, descriptionId, close }: any) => {
       <p id={descriptionId}>Keep the name short!</p>
       <input placeholder="Name" />
       <button onClick={close}>Create</button>
+      <button>Next tip</button>
     </>
   );
 };
 
-const PopoverWrapper = ({ openPopover, setOpenPopover, children }: any) => {
+const PopoverWrapper = ({
+  openPopover,
+  setOpenPopover,
+  children,
+  thisOrder,
+  currentOrder,
+}: any) => {
   return (
-    <Popover
-      render={({ close, labelId, descriptionId }) => (
-        <PopoverContentComponent labelId={labelId} descriptionId={descriptionId} close={close} />
+    <>
+      {thisOrder === currentOrder ? (
+        <Popover
+          render={({ close, labelId, descriptionId }) => (
+            <PopoverContentComponent
+              labelId={labelId}
+              descriptionId={descriptionId}
+              close={close}
+            />
+          )}
+          open={openPopover}
+          setOpenPopover={setOpenPopover}
+        >
+          {children}
+        </Popover>
+      ) : (
+        <>1</>
       )}
-      open={openPopover}
-      setOpenPopover={setOpenPopover}
-    >
-      {children}
-    </Popover>
+    </>
   );
 };
 

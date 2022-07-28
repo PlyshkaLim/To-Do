@@ -1,8 +1,11 @@
+import './Popover.css';
+
 import {
   FloatingFocusManager,
   Placement,
   autoUpdate,
   flip,
+  hide,
   offset,
   shift,
   useClick,
@@ -14,7 +17,6 @@ import {
 } from '@floating-ui/react-dom-interactions';
 import * as React from 'react';
 import { cloneElement, useState } from 'react';
-import './Popover.css';
 
 interface Props {
   render: (data: { close: () => void; labelId: string; descriptionId: string }) => React.ReactNode;
