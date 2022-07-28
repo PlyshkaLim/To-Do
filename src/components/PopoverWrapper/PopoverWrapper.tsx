@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Dispatch } from 'react';
 
 import { Popover } from '../Popover/Popover';
 
@@ -13,14 +14,20 @@ const PopoverContentComponent = ({ labelId, descriptionId, close }: any) => {
     </>
   );
 };
-
+type PopoverWrapper = {
+  isOpenPopover: boolean;
+  setIsOpenPopover: Dispatch<React.SetStateAction<boolean>>;
+  children: any;
+  thisOrder: number;
+  currentOrder: number;
+};
 const PopoverWrapper = ({
-  openPopover,
-  setOpenPopover,
+  isOpenPopover,
+  setIsOpenPopover,
   children,
   thisOrder,
   currentOrder,
-}: any) => {
+}: PopoverWrapper) => {
   return (
     <>
       {thisOrder === currentOrder ? (
@@ -32,8 +39,8 @@ const PopoverWrapper = ({
               close={close}
             />
           )}
-          open={openPopover}
-          setOpenPopover={setOpenPopover}
+          open={isOpenPopover}
+          setIsOpenPopover={setIsOpenPopover}
         >
           {children}
         </Popover>

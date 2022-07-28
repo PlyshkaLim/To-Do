@@ -1,11 +1,9 @@
 import '../../reset.css';
 
-//import 'tippy.js/dist/tippy.css';
 import * as React from 'react';
 import { ChangeEvent, Dispatch, SetStateAction, useContext, useRef, useState } from 'react';
 
 import { Context } from '../../ListContext';
-import Dialog from '../Dialog/Dialog';
 import { ActionTypeEnum, Filter, Keys } from '../Enums';
 import InputTextField from '../InputTextField/InputTextField';
 import Options from '../Options/Options';
@@ -14,8 +12,8 @@ import SideMenuButtons from '../SideMenuButtons/SideMenuButtons';
 import TippyComponent from '../TippyComponent';
 import ToDoLines from '../ToDoLines/ToDoLines';
 import ToolTipExample from '../ToolTipExample/ToolTipExample';
-import ToolTipTest from '../ToolTipTest/ToolTipTest';
 import css from './App.scss';
+import { Popover2 } from "../Popover2/Popover2";
 
 type AppProps = {
   inputState: string;
@@ -70,7 +68,7 @@ const App = ({ inputState, setInputState }: AppProps) => {
   ];
 
   const [openToolTipExample, setOpenToolTipExample] = useState<boolean>(false);
-  const [openPopover, setOpenPopover] = useState(false);
+  const [isOpenPopover, setIsOpenPopover] = useState(false);
   const [currentPopover, setCurrentPopover] = useState<number>(0);
   const popoverArray = [
     {
@@ -80,6 +78,8 @@ const App = ({ inputState, setInputState }: AppProps) => {
       order: 1,
     },
   ];
+  const [isPopover2Open, setIsPopover2Open] = useState<boolean>(false);
+
   return (
     <div className={css.app}>
       <div className={css.sideMenu}>
@@ -91,10 +91,12 @@ const App = ({ inputState, setInputState }: AppProps) => {
           refIndex={refIndex}
           setRefIndex={setRefIndex}
           refArray={refArray}
-          setOpenPopover={setOpenPopover}
+          setIsOpenPopover={setIsOpenPopover}
           currentPopover={currentPopover}
           setCurrentPopover={setCurrentPopover}
           popoverArrayLength={popoverArray.length}
+          isPopover2Open={isPopover2Open}
+          setIsPopover2Open={setIsPopover2Open}
         />
       </div>
       <div className={css.main}>
@@ -153,21 +155,39 @@ const App = ({ inputState, setInputState }: AppProps) => {
         </Dialog>*/}
         <br />
         <PopoverWrapper
-          openPopover={openPopover}
-          setOpenPopover={setOpenPopover}
+          isOpenPopover={isOpenPopover}
+          setIsOpenPopover={setIsOpenPopover}
           thisOrder={0}
           currentOrder={popoverArray[currentPopover].order}
         >
           <div>123456</div>
         </PopoverWrapper>
+
         <PopoverWrapper
-          openPopover={openPopover}
-          setOpenPopover={setOpenPopover}
+          isOpenPopover={isOpenPopover}
+          setIsOpenPopover={setIsOpenPopover}
           thisOrder={1}
           currentOrder={popoverArray[currentPopover].order}
         >
           <div>123456789</div>
         </PopoverWrapper>
+        <Popover2
+          open={isPopover2Open}
+          setOpen={setIsPopover2Open}
+          placement={'top-start'}
+          render={({ close, descriptionId }) => (
+            <>
+              <p id={descriptionId}>
+                Какая-то подсказка, которая не мешает сценарию, ее можно закрыть по крестику
+              </p>
+              <button onClick={close} className="cross">
+                х
+              </button>
+            </>
+          )}
+        >
+          <button>Click to open popover</button>
+        </Popover2>
       </div>
     </div>
   );

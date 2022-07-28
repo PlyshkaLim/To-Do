@@ -1,0 +1,19 @@
+.Popover {
+    font-size: 14px;
+    line-height: 20px;
+    color: white;
+    pointer-events: none;
+    background: #0697ff;
+    box-shadow: 2px 8px 16px rgba(6, 151, 255, 0.2),
+    0px -2px 4px rgba(6, 151, 255, 0.2);
+    border-radius: 8px;
+    max-width: 256px;
+    text-align: left;
+    padding: 12px;
+}
+
+.cross {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
